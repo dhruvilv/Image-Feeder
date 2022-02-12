@@ -7,7 +7,7 @@
 
 import Foundation
 
-case LoadFeedResult {
+enum LoadFeedResult {
     case success([FeedItem])
     case error(Error)
 }
