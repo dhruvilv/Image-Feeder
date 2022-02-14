@@ -9,8 +9,12 @@ import XCTest
 import EssentialFeed
 
 class HTTPClientSpy: HTTPClient {
+    
     var requestedURL: URL?
+    var requestedURLCallCount = 0
+    
     func get(from url: URL) {
+        requestedURLCallCount += 1
         requestedURL = url
     }
 }
@@ -27,6 +31,16 @@ class RemoteFeedLoaderTests: XCTestCase {
         let (sut, client) = makeSUT(url: url)
         sut.load()
         XCTAssertNotNil(client.requestedURL)
+        XCTAssertEqual(client.requestedURL, URL(string: "https://www.a-url.com")!)
+    }
+    
+    func test_loadTwice_requestsDataFromURLTwice() {
+        let url = URL(string: "https://www.a-url.com")!
+        let (sut, client) = makeSUT(url: url)
+        sut.load()
+        sut.load()
+        XCTAssertNotNil(client.requestedURL)
+        XCTAssertEqual(client.requestedURLCallCount, 2)
         XCTAssertEqual(client.requestedURL, URL(string: "https://www.a-url.com")!)
     }
     
