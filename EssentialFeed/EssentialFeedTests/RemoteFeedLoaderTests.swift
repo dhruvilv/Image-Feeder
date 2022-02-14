@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import EssentialFeed
+import EssentialFeed
 
 class HTTPClientSpy: HTTPClient {
     var requestedURL: URL?
