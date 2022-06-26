@@ -20,6 +20,11 @@ public final class RemoteFeedLoader {
     let client: HTTPClient
     let url: URL
     
+    public enum RemoteFeedLoaderResult {
+        case success([FeedItem])
+        case failure(Error)
+    }
+    
     public enum Error {
         case connectivity
         case invalidData
