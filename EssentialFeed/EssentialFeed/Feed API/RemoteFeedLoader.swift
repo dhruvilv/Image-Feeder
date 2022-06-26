@@ -12,7 +12,7 @@ public protocol HTTPClient {
 }
 
 public enum HTTPClientResult {
-    case success(HTTPURLResponse)
+    case success(HTTPURLResponse, Data)
     case failure
 }
 
@@ -38,7 +38,7 @@ public final class RemoteFeedLoader {
     ) {
         client.get(from: url) { result in
             switch result {
-            case .success:
+            case let .success(response, data):
                 completion(.invalidData)
             case .failure:
                 completion(.connectivity)
