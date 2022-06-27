@@ -72,7 +72,56 @@ class RemoteFeedLoaderTests: XCTestCase {
         })
     }
     
+    func test_load_deliversItemsOn200HTTPResponseWithValidJSONItems() {
+        
+        let item1 = makeJSON(
+            id: UUID(),
+            imageURL: URL(string: "http://a-url.com")!
+        )
+        
+        let item2 = makeJSON(
+            id: UUID(),
+            description: "a description",
+            location: "a location",
+            imageURL: URL(string: "http://another-url.com")!
+        )
+        
+        let itemsJSON = [
+            "items": [item1.json, item2.json]
+        ]
+        
+        let (sut, client) = makeSUT()
+        expect(sut, toCompleteWithResult: .success([item1.model, item2.model]), when: {
+            let jsonData = try! JSONSerialization.data(withJSONObject: itemsJSON)
+            client.complete(withStatusCode: 200, data: jsonData)
+        })
+    }
+    
     // MARK: - Helpers
+    
+    private func makeJSON(
+        id: UUID,
+        description: String? = nil,
+        location: String? = nil,
+        imageURL: URL
+    ) -> (model: FeedItem, json: [String: Any]) {
+        
+        let item = FeedItem(
+            id: id,
+            description: description,
+            location: location,
+            imageURL: imageURL
+        )
+        
+        let json = [
+            "id": item.id.uuidString,
+            "description": item.description,
+            "location": item.location,
+            "image": item.imageURL.absoluteString
+        ].compactMapValues { $0 }
+        
+        return (item, json)
+    }
     
     private func makeSUT(
         url: URL = URL(string: "https://www.a-url.com")!
