@@ -74,12 +74,12 @@ class RemoteFeedLoaderTests: XCTestCase {
     
     func test_load_deliversItemsOn200HTTPResponseWithValidJSONItems() {
         
-        let item1 = makeJSON(
+        let item1 = makeItem(
             id: UUID(),
             imageURL: URL(string: "http://a-url.com")!
         )
         
-        let item2 = makeJSON(
+        let item2 = makeItem(
             id: UUID(),
             description: "a description",
             location: "a location",
@@ -99,7 +99,7 @@ class RemoteFeedLoaderTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeJSON(
+    private func makeItem(
         id: UUID,
         description: String? = nil,
         location: String? = nil,
