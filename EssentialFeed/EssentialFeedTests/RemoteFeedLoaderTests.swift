@@ -50,7 +50,8 @@ class RemoteFeedLoaderTests: XCTestCase {
         let samples = [199, 201, 300, 400]
         samples.enumerated().forEach { index, code in
             expect(sut, toCompleteWith: .failure(.invalidData), when: {
-                client.complete(withStatusCode: code, at: index)
+                let json = makeItemsJSON([])
+                client.complete(withStatusCode: code, data: json, at: index)
             })
         }
     }
@@ -85,21 +86,25 @@ class RemoteFeedLoaderTests: XCTestCase {
             location: "a location",
             imageURL: URL(string: "http://another-url.com")!
         )
-        
+                
+        let itemsModel = [item1.model, item2.model]
         let itemsJSON = [item1.json, item2.json]
-        let items = [item1.model, item2.model]
+        
         let (sut, client) = makeSUT()
-        expect(sut, toCompleteWith: .success(items), when: {
-            let jsonData = makeItemsJSON(items: itemsJSON)
+        expect(sut, toCompleteWith: .success(itemsModel), when: {
+            let jsonData = makeItemsJSON(itemsJSON)
             client.complete(withStatusCode: 200, data: jsonData)
         })
     }
     
     // MARK: - Helpers
     
-    private func makeItemsJSON(items: [[String: Any]]) -> Data {
-        let json = ["items": items]
-        return try! JSONSerialization.data(withJSONObject: json)
+    private func makeSUT(
+        url: URL = URL(string: "https://www.a-url.com")!
+    ) -> (RemoteFeedLoader, HTTPClientSpy) {
+        let client = HTTPClientSpy()
+        let sut = RemoteFeedLoader(url: url, client: client)
+        return (sut, client)
     }
     
     private func makeItem(
@@ -126,12 +131,9 @@ class RemoteFeedLoaderTests: XCTestCase {
         return (item, json)
     }
     
-    private func makeSUT(
-        url: URL = URL(string: "https://www.a-url.com")!
-    ) -> (RemoteFeedLoader, HTTPClientSpy) {
-        let client = HTTPClientSpy()
-        let sut = RemoteFeedLoader(url: url, client: client)
-        return (sut, client)
+    private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
+        let json = ["items": items]
+        return try! JSONSerialization.data(withJSONObject: json)
     }
     
     private func expect(
@@ -172,7 +174,7 @@ class RemoteFeedLoaderTests: XCTestCase {
             messages[index].completion(.failure)
         }
         
-        func complete(withStatusCode code: Int, data: Data = Data(), at index: Int = 0) {
+        func complete(withStatusCode code: Int, data: Data, at index: Int = 0) {
             let response = HTTPURLResponse(
                 url: requestedURLs[index],
                 statusCode: code,
