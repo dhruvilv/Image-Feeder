@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9FD8AC202887E3950035E6B8 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD8AC1F2887E3950035E6B8 /* HTTPClient.swift */; };
+		9FD8AC222887E5370035E6B8 /* FeedItemsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD8AC212887E5370035E6B8 /* FeedItemsMapper.swift */; };
 		9FE22C9D27B7A7E9006BAA96 /* EssentialFeed.docc in Sources */ = {isa = PBXBuildFile; fileRef = 9FE22C9C27B7A7E9006BAA96 /* EssentialFeed.docc */; };
 		9FE22CA327B7A7E9006BAA96 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE22C9827B7A7E9006BAA96 /* EssentialFeed.framework */; };
 		9FE22CA827B7A7E9006BAA96 /* EssentialFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE22CA727B7A7E9006BAA96 /* EssentialFeedTests.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		9FD8AC1F2887E3950035E6B8 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		9FD8AC212887E5370035E6B8 /* FeedItemsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemsMapper.swift; sourceTree = "<group>"; };
 		9FE22C9827B7A7E9006BAA96 /* EssentialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EssentialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FE22C9B27B7A7E9006BAA96 /* EssentialFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EssentialFeed.h; sourceTree = "<group>"; };
 		9FE22C9C27B7A7E9006BAA96 /* EssentialFeed.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = EssentialFeed.docc; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			children = (
 				9FE22CBA27B9C4A9006BAA96 /* RemoteFeedLoader.swift */,
 				9FD8AC1F2887E3950035E6B8 /* HTTPClient.swift */,
+				9FD8AC212887E5370035E6B8 /* FeedItemsMapper.swift */,
 			);
 			path = "Feed API";
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				9FE22CBB27B9C4A9006BAA96 /* RemoteFeedLoader.swift in Sources */,
 				9FD8AC202887E3950035E6B8 /* HTTPClient.swift in Sources */,
 				9FE22CB527B7ACB0006BAA96 /* FeedLoader.swift in Sources */,
+				9FD8AC222887E5370035E6B8 /* FeedItemsMapper.swift in Sources */,
 				9FE22CB327B7AA5F006BAA96 /* FeedItem.swift in Sources */,
 				9FE22C9D27B7A7E9006BAA96 /* EssentialFeed.docc in Sources */,
 			);
