@@ -115,7 +115,7 @@ class RemoteFeedLoaderTests: XCTestCase {
     
     private func makeSUT(
         url: URL = URL(string: "https://www.a-url.com")!,
-        file: StaticString = #file,
+        file: StaticString = #filePath,
         line: UInt = #line
     ) -> (RemoteFeedLoader, HTTPClientSpy) {
         let client = HTTPClientSpy()
