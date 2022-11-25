@@ -1,6 +1,8 @@
 # Image-Feeder
 An implementation of iOS Lead Essentials Image Feeder App
 
+[![CI](https://github.com/dhruvilv/Image-Feeder/actions/workflows/CI.yml/badge.svg)](https://github.com/dhruvilv/Image-Feeder/actions/workflows/CI.yml)
+
 
 # Business Requirements: 
 
